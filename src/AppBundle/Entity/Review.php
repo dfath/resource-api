@@ -4,10 +4,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * A review of a book.
  *
+ * @ApiResource
  * @ORM\Entity
  */
 class Review
