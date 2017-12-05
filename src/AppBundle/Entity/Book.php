@@ -7,9 +7,18 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A book.
+ * A Secured resource book.
  *
- * @ApiResource
+ * @ApiResource(
+ *     attributes={"access_control"="is_granted('ROLE_SUPER')"},
+ *     collectionOperations={
+ *         "get"={"method"="GET"},
+ *         "post"={"method"="POST", "access_control"="is_granted('ROLE_SUPER')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET", "access_control"="is_granted('ROLE_SUPER') and object.owner == user"}
+ *     }
+ * )
  * @ORM\Entity
  */
 class Book

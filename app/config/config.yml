@@ -82,6 +82,9 @@ nelmio_cors:
         '^/': ~
 
 api_platform:
+    # Specify a name converter to use.
+    name_converter: 'app.name_converter'
+
     http_cache:
         invalidation:
             enabled: true

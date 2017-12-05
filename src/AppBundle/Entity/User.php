@@ -83,6 +83,7 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
+        // TODO make it dynamic
         return array('ROLE_USER', 'ROLE_ADMIN');
     }
 
