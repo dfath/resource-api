@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ApiResource
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
 {
@@ -54,6 +55,11 @@ class User implements UserInterface, \Serializable
      */
     protected $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $apiKey;
+
     public function __construct()
     {
     }
@@ -77,7 +83,7 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('ROLE_USER', 'ROLE_ADMIN');
     }
 
     public function eraseCredentials()

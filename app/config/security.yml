@@ -2,10 +2,16 @@
 # http://symfony.com/doc/current/book/security.html
 security:
 
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        user_db:
+            entity:
+                class: AppBundle\Entity\User
+                property: null
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -13,8 +19,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        api:
+            pattern: ^/api
+            guard:
+                authenticators:
+                    - AppBundle\Security\TokenAuthenticator
+
         main:
             anonymous: ~
+
             # activate different ways to authenticate
 
             # http_basic: ~
